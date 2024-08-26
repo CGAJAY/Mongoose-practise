@@ -1,0 +1,16 @@
+{
+	"name": "mongoose",
+	"version": "1.0.0",
+	"main": "script.js",
+	"type": "module",
+	"scripts": {
+		"start": "nodemon script.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"mongoose": "^8.5.4"
+	}
+}
