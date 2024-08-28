@@ -1,5 +1,5 @@
 import express from "express";
-import { connectDB } from "./config/db.js";
+import { connectDB } from "./db/db.js";
 import customerRoutes from "./routes/customerRoute.js";
 import { myrouter } from "./routes/home.js";
 
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/", myrouter);
 
 // Use the customer routes
-app.use("/customers", customerRoutes);
+app.use("/", customerRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
