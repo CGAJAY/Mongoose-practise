@@ -1,10 +1,10 @@
 // Importing the mongoose library
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
 // mongoDB connection string
-const uri =
-	"mongodb+srv://admin:12345@cluster0.g1dam.mongodb.net/starlink?retryWrites=true&w=majority&appName=Cluster0";
-
+const uri = process.env.DB_URI;
 // asynchronous function to connect to mongoDB database
 export const connectDB = async () => {
 	try {

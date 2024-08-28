@@ -2,7 +2,10 @@ import express from "express";
 import { connectDB } from "./db/db.js";
 import customerRoutes from "./routes/customerRoute.js";
 import { myrouter } from "./routes/home.js";
+import dotenv from "dotenv";
+dotenv.config();
 
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Connect to the database
@@ -17,7 +20,6 @@ app.use("/", myrouter);
 app.use("/", customerRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
 	console.log(`Server running on port ${PORT}`)
 );
