@@ -17,6 +17,7 @@ app.use(express.json());
 app.use("/", myrouter);
 
 // Use the customer routes
+app.use("/customers", customerRoutes);
 app.use("/", customerRoutes);
 
 // Start the server

@@ -39,3 +39,16 @@ export const getCustomerById = async (req, res) => {
 		res.status(500).json({ message: err.message });
 	}
 };
+
+// Get a customers with age less than 30
+export const getCustomersUnder30 = async (req, res) => {
+	try {
+		// Find customers where age is less than 30
+		const customers = await Customer.find({
+			age: { $lt: 30 },
+		});
+		res.status(200).json(customers);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+};
