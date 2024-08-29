@@ -4,17 +4,18 @@ import {
 	getCustomers,
 	getCustomerById,
 	getCustomersUnder30,
+	getCustomersOver30,
+	getCustomersByName,
 } from "../controllers/customerController.js";
 
 const router = express.Router();
 
 // /customers/
-router.post("/customers", createCustomer);
-router.get("/all", getCustomers);
+router.post("/", createCustomer);
+router.get("/", getCustomers);
 router.get("/under30", getCustomersUnder30);
-router.get("/customers/:id", getCustomerById);
+router.get("/over30", getCustomersOver30);
+router.get("/:name", getCustomersByName);
+router.get("/:id", getCustomerById);
 
-// /customers/all
-router.get("/all", createCustomer);
-
-export default router;
+export { router };

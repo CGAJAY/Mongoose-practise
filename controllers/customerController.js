@@ -52,3 +52,31 @@ export const getCustomersUnder30 = async (req, res) => {
 		res.status(500).json({ message: err.message });
 	}
 };
+
+// Get a customers with age greater than 30
+export const getCustomersOver30 = async (req, res) => {
+	try {
+		// Find customers where age is greater than 30
+		const customers = await Customer.find({
+			age: { $gt: 30 },
+		});
+		res.status(200).json(customers);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+};
+
+// Get a customers where the name matches the given name
+export const getCustomersByName = async (req, res) => {
+	try {
+		// Extract the name from the request parameters
+		const name = req.params.name;
+
+		// Find customers where the name matches the given name
+		const customers = await Customer.find({ name: name });
+
+		res.status(200).json(customers);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+};

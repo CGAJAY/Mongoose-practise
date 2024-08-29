@@ -1,6 +1,6 @@
 import express from "express";
 import { connectDB } from "./db/db.js";
-import customerRoutes from "./routes/customerRoute.js";
+import { router } from "./routes/customerRoute.js";
 import { myrouter } from "./routes/home.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -17,8 +17,7 @@ app.use(express.json());
 app.use("/", myrouter);
 
 // Use the customer routes
-app.use("/customers", customerRoutes);
-app.use("/", customerRoutes);
+app.use("/customers", router);
 
 // Start the server
 app.listen(PORT, () =>
