@@ -15,11 +15,21 @@ export const createCustomer = async (req, res) => {
 	}
 };
 
-// Get all customers
+// Retrieve customers based on age filter else get all customers
 export const getCustomers = async (req, res) => {
 	try {
-		const customers = await Customer.find();
-		res.json(customers);
+		const { gt, lt } = req.query;
+		let filter = {};
+
+		if (gt) {
+			filter.age = { $gt: parseInt(gt) };
+		}
+		if (lt) {
+			filter.age = { $lt: parseInt(lt) };
+		}
+
+		const customers = await Customer.find(filter);
+		res.status(200).json(customers);
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}
@@ -35,32 +45,6 @@ export const getCustomerById = async (req, res) => {
 				.json({ message: "Customer not found" });
 		}
 		res.json(customer);
-	} catch (err) {
-		res.status(500).json({ message: err.message });
-	}
-};
-
-// Get a customers with age less than 30
-export const getCustomersUnder30 = async (req, res) => {
-	try {
-		// Find customers where age is less than 30
-		const customers = await Customer.find({
-			age: { $lt: 30 },
-		});
-		res.status(200).json(customers);
-	} catch (err) {
-		res.status(500).json({ message: err.message });
-	}
-};
-
-// Get a customers with age greater than 30
-export const getCustomersOver30 = async (req, res) => {
-	try {
-		// Find customers where age is greater than 30
-		const customers = await Customer.find({
-			age: { $gt: 30 },
-		});
-		res.status(200).json(customers);
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}
