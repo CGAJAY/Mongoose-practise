@@ -15,6 +15,29 @@ export const createCustomer = async (req, res) => {
 	}
 };
 
+export const authenticate = (req, res, next) => {
+	const authHeader = req.headers.authorization;
+
+	if (!authHeader) {
+		return res
+			.status(401)
+			.json({ message: "Authorization header missing" });
+	}
+
+	const [type, password] = authHeader.split(" ");
+
+	if (
+		type !== "Bearer" ||
+		password !== process.env.RETRIEVE_PASSWORD
+	) {
+		return res
+			.status(403)
+			.json({ message: "Forbidden: Incorrect password" });
+	}
+
+	next();
+};
+
 // Retrieve customers based on age filter else get all customers
 export const getCustomers = async (req, res) => {
 	try {
